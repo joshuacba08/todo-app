@@ -7,6 +7,11 @@ const TaskList = ({tasks, handleState}) => {
 
       {tasks.map(el => <Task key={el.id} task={el} handleState={handleState}/>)}
 
+      <div className="flex gap-3 justify-between items-center px-6 bg-slate-800 h-12 text-slate-500 font-semibold">
+        <button>5 items left</button>
+        <button>Clear completed</button>
+      </div>
+
     </div>
   )
 }
