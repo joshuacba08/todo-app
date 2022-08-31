@@ -1,28 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { TasksContext } from '../context/TasksContext';
 import Task from './Task';
-const TaskList = ({tasks, handleState}) => {
+const TaskList = ({ theme }) => {
+
+  const taskContext = useContext(TasksContext);
+  const { tasks, handleState, clearCompleted } = taskContext;
+
+  const getItemsLeft = (arrayTasks) => {
+    const result = arrayTasks.filter(el => el.state === false);
+    return result.length;
+  }
+
   return (
-    <div className={'mt-6 rounded-lg overflow-hidden w-4/5 ml-auto mr-auto'}>
+    <div className={'mt-6 flex flex-col gap-1px rounded-lg overflow-hidden w-4/5 ml-auto mr-auto'}>
 
       {tasks.map(el => <Task key={el.id} task={el} handleState={handleState}/>)}
 
-      <div className="flex gap-3 justify-between items-center px-6 bg-slate-800 h-12 text-slate-500 font-semibold">
-        <button>5 items left</button>
-        <button>Clear completed</button>
+      <div className={`flex gap-3 justify-between items-center px-6 ${theme=='dark'?'bg-slate-800':'bg-white'} h-12 text-slate-500 font-semibold`}>
+        <button>{ getItemsLeft(tasks) } items left</button>
+        <button onClick={()=>{clearCompleted(tasks)}}>Clear completed</button>
       </div>
 
     </div>
   )
-}
-
-TaskList.propTypes = {
-  tasks: PropTypes.array.isRequired,
-  handleState: PropTypes.func.isRequired
-}
-
-TaskList.defaultProps = {
-  tasks: [{id:0, description:'lorem ipsum', state: false}]
 }
 
 
