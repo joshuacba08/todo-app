@@ -10,13 +10,13 @@ const TaskContainer = () => {
 
   const { theme } = useContext(ThemeContext);
 
-  const momorizedOnAdd = useCallback( () => {
-    alert('Se agregó una nueva tarea');
-  },[])
+  // const momorizedOnAdd = useCallback( () => {
+  //   alert('Se agregó una nueva tarea');
+  // },[])
 
   return (
     <div className='relative -top-24'>
-        <InputTask onAdd = {momorizedOnAdd} theme={theme} placeholder={'Ingresa una nueva tarea'} />
+        <InputTask theme={theme} placeholder={'Ingresa una nueva tarea'} />
         <TaskList theme={theme} />
 
     </div>
