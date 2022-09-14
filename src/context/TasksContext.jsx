@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import Swal from 'sweetalert2';
 
 export const TasksContext = createContext();
 
@@ -14,6 +15,12 @@ const TasksProvider = (props) => {
       const newArrayTask = tasks.map(el=>{
         if(el.id == id){
           el.state = !el.state
+          if(el.state === true){
+            Swal.fire({
+              title:"Buen trabajo 💪✨",
+              icon:"success"
+            });
+          }
         }
         return el;
       });

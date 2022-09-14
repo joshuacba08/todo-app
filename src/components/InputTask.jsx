@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import Swal from 'sweetalert2';
 import { TasksContext } from '../context/TasksContext';
 import PropTypes from 'prop-types';
 
@@ -6,6 +7,15 @@ const InputTask = ({ placeholder, theme}) => {
 
     const taskContext = useContext(TasksContext);
     const { addTask } = taskContext;
+
+    const Toast = Swal.mixin({
+        toast:true,
+        background:"#16a34a",
+        color:"white",
+        position:"bottom",
+        timer:2000,
+        showConfirmButton: false
+    })
 
     const [ value, setValue ] = useState('');
     const hangleOnChange = (e) => {
@@ -18,6 +28,10 @@ const InputTask = ({ placeholder, theme}) => {
             state:false
         });
         setValue('');
+        Toast.fire({
+            title: 'Tarea agregada'
+          });
+        
     }
 
   return (
