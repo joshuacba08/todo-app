@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { TasksContext } from '../context/TasksContext';
 import Task from './Task';
+
 const TaskList = ({ theme }) => {
 
   const taskContext = useContext(TasksContext);
@@ -10,6 +11,8 @@ const TaskList = ({ theme }) => {
     const result = arrayTasks.filter(el => el.state === false);
     return result.length;
   }
+  
+  const memorizedValue = useMemo( () => getItemsLeft(tasks),[tasks]);
 
   return (
     <div className={'mt-6 flex flex-col gap-1px rounded-lg overflow-hidden w-4/5 ml-auto mr-auto'}>
@@ -17,7 +20,7 @@ const TaskList = ({ theme }) => {
       {tasks.map(el => <Task key={el.id} task={el} handleState={handleState}/>)}
 
       <div className={`flex gap-3 justify-between items-center px-6 ${theme=='dark'?'bg-slate-800':'bg-white'} h-12 text-slate-500 font-semibold`}>
-        <button>{ getItemsLeft(tasks) } items left</button>
+        <button>{ memorizedValue } items left</button>
         <button onClick={()=>{clearCompleted(tasks)}}>Clear completed</button>
       </div>
 

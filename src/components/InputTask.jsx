@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { TasksContext } from '../context/TasksContext';
 import PropTypes from 'prop-types';
 
-const InputTask = ({ placeholder, theme }) => {
+const InputTask = ({ placeholder, theme, onAdd }) => {
 
     const taskContext = useContext(TasksContext);
     const { addTask } = taskContext;
@@ -18,6 +18,7 @@ const InputTask = ({ placeholder, theme }) => {
             state:false
         });
         setValue('');
+        onAdd();
     }
 
   return (
